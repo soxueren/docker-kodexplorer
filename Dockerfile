@@ -19,12 +19,14 @@ freetype-dev libpng-dev libjpeg-turbo-dev \
 && docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" gd \
 && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
+RUN mkdir /data
+
+VOLUME /data
+
 WORKDIR /var/www/html
 
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod a+x /usr/local/bin/entrypoint.sh
-
-VOLUME /var/www/html/data/User /var/www/html/data/Group/public/home
 
 EXPOSE 80
 
